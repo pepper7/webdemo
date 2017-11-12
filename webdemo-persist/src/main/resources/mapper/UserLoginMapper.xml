@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.salt.webdemo.dao.IUserLoginDao">
+  <resultMap id="BaseResultMap" type="com.guoyao.mom.model.UserLogin">
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="login_name" jdbcType="VARCHAR" property="loginName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="enabled" jdbcType="TINYINT" property="enabled" />
+    <result column="locked" jdbcType="TINYINT" property="locked" />
+    <result column="created_by" jdbcType="BIGINT" property="createdBy" />
+    <result column="creation_date" jdbcType="TIMESTAMP" property="creationDate" />
+    <result column="last_updated_by" jdbcType="BIGINT" property="lastUpdatedBy" />
+    <result column="last_updated_date" jdbcType="TIMESTAMP" property="lastUpdatedDate" />
+    <result column="wx_open_id" jdbcType="VARCHAR" property="wxOpenId" />
+    <result column="wx_image" jdbcType="VARCHAR" property="wxImage" />
+    <result column="wx_nickname" jdbcType="VARCHAR" property="wxNickname" />
+    <result column="dept_id" jdbcType="VARCHAR" property="deptId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, login_name, password, salt, user_name, enabled, locked, created_by, creation_date, 
+    last_updated_by, last_updated_date, wx_open_id, wx_image, wx_nickname, dept_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_login
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user_login
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.guoyao.mom.model.UserLogin">
+    insert into user_login (user_id, login_name, password, 
+      salt, user_name, enabled, 
+      locked, created_by, creation_date, 
+      last_updated_by, last_updated_date, wx_open_id, 
+      wx_image, wx_nickname, dept_id
+      )
+    values (#{userId,jdbcType=BIGINT}, #{loginName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{salt,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{enabled,jdbcType=TINYINT}, 
+      #{locked,jdbcType=TINYINT}, #{createdBy,jdbcType=BIGINT}, #{creationDate,jdbcType=TIMESTAMP}, 
+      #{lastUpdatedBy,jdbcType=BIGINT}, #{lastUpdatedDate,jdbcType=TIMESTAMP}, #{wxOpenId,jdbcType=VARCHAR}, 
+      #{wxImage,jdbcType=VARCHAR}, #{wxNickname,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.guoyao.mom.model.UserLogin">
+    insert into user_login
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="loginName != null">
+        login_name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="salt != null">
+        salt,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="enabled != null">
+        enabled,
+      </if>
+      <if test="locked != null">
+        locked,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="creationDate != null">
+        creation_date,
+      </if>
+      <if test="lastUpdatedBy != null">
+        last_updated_by,
+      </if>
+      <if test="lastUpdatedDate != null">
+        last_updated_date,
+      </if>
+      <if test="wxOpenId != null">
+        wx_open_id,
+      </if>
+      <if test="wxImage != null">
+        wx_image,
+      </if>
+      <if test="wxNickname != null">
+        wx_nickname,
+      </if>
+      <if test="deptId != null">
+        dept_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=TINYINT},
+      </if>
+      <if test="locked != null">
+        #{locked,jdbcType=TINYINT},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="creationDate != null">
+        #{creationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdatedBy != null">
+        #{lastUpdatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="lastUpdatedDate != null">
+        #{lastUpdatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wxOpenId != null">
+        #{wxOpenId,jdbcType=VARCHAR},
+      </if>
+      <if test="wxImage != null">
+        #{wxImage,jdbcType=VARCHAR},
+      </if>
+      <if test="wxNickname != null">
+        #{wxNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null">
+        #{deptId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.guoyao.mom.model.UserLogin">
+    update user_login
+    <set>
+      <if test="loginName != null">
+        login_name = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=TINYINT},
+      </if>
+      <if test="locked != null">
+        locked = #{locked,jdbcType=TINYINT},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="creationDate != null">
+        creation_date = #{creationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdatedBy != null">
+        last_updated_by = #{lastUpdatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="lastUpdatedDate != null">
+        last_updated_date = #{lastUpdatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wxOpenId != null">
+        wx_open_id = #{wxOpenId,jdbcType=VARCHAR},
+      </if>
+      <if test="wxImage != null">
+        wx_image = #{wxImage,jdbcType=VARCHAR},
+      </if>
+      <if test="wxNickname != null">
+        wx_nickname = #{wxNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null">
+        dept_id = #{deptId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.guoyao.mom.model.UserLogin">
+    update user_login
+    set login_name = #{loginName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      enabled = #{enabled,jdbcType=TINYINT},
+      locked = #{locked,jdbcType=TINYINT},
+      created_by = #{createdBy,jdbcType=BIGINT},
+      creation_date = #{creationDate,jdbcType=TIMESTAMP},
+      last_updated_by = #{lastUpdatedBy,jdbcType=BIGINT},
+      last_updated_date = #{lastUpdatedDate,jdbcType=TIMESTAMP},
+      wx_open_id = #{wxOpenId,jdbcType=VARCHAR},
+      wx_image = #{wxImage,jdbcType=VARCHAR},
+      wx_nickname = #{wxNickname,jdbcType=VARCHAR},
+      dept_id = #{deptId,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByLoginName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" />
+    FROM user_login
+    where login_name = #{_parameter}
+  </select>
+
+  <select id="selectByOpenId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" />
+    FROM user_login
+    where wx_open_id = #{wxOpenId}
+  </select>
+
+  <sql id="Base_Column_List_Alias">
+    u.user_id, u.login_name, u.password, u.salt, u.user_name, u.enabled, u.locked, u.created_by, u.creation_date,
+    u.last_updated_by, u.last_updated_date, u.wx_open_id, u.wx_image, u.wx_nickname, u.dept_id
+  </sql>
+
+  <select id="selectVoByParams" parameterType="java.util.Map" resultType="com.guoyao.mom.model.vo.UserLoginVo">
+    SELECT <include refid="Base_Column_List_Alias" />,
+      crt.user_name AS created_user_name,
+      upt.user_name AS updated_user_name
+    FROM user_login u
+    LEFT JOIN user_login crt ON u.created_by = crt.user_id
+    LEFT JOIN user_login upt ON u.created_by = upd.user_id
+    <where>
+      <if test="userId != null and userId !=''">
+        AND u.user_id = #{userId}
+      </if>
+      <if test="loginName != null and loginName  !=''">
+        AND u.login_name COLLATE utf8_bin LIKE '${loginName}%'
+      </if>
+      <if test="enabled != null">
+        AND u.enabled = #{enabled}
+      </if>
+      <if test="userName  != null and userName  !=''">
+        AND u.user_name COLLATE utf8_bin LIKE '${userName}%'
+      </if>
+      <if test="wxOpenId  != null and wxOpenId  !=''">
+        AND u.wx_open_id = #{wxOpenId}
+      </if>
+      <if test="createdBy  != null ">
+        AND u.created_by = #{createdBy}
+      </if>
+      <if test="creationDate  != null ">
+        AND u.creation_date  = #{creationDate}
+      </if>
+      <if test="lastUpdatedBy  != null ">
+        AND u.last_updated_by = #{lastUpdatedBy}
+      </if>
+      <if test="lastUpdatedDate  != null ">
+        AND u.last_updated_date  = #{lastUpdatedDate}
+      </if>
+    </where>
+  </select>
+</mapper>
